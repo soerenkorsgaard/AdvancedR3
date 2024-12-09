@@ -17,4 +17,5 @@ Title: AdvancedR3
 URL: https://github.com/soerenkorsgaard/AdvancedR3
 BugReports: https://github.com/soerenkorsgaard/AdvancedR3/issues
 Suggests: 
+    styler,
     usethis

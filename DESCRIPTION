@@ -6,3 +6,5 @@ Imports:
     rmarkdown
 Encoding: UTF-8
 Title: AdvancedR3
+URL: https://github.com/soerenkorsgaard/AdvancedR3
+BugReports: https://github.com/soerenkorsgaard/AdvancedR3/issues

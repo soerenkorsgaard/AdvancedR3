@@ -11,7 +11,8 @@ employed.
 The following folders contain:
 
 -   `data/`:
-    -   Lipidomics (dataset)
+    -   Lipidomics
+        -   Dataset
 -   `doc/`:
     -   Learning.qmd
         -   here we write some code, alter it, and prepare final

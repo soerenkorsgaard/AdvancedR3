@@ -20,3 +20,5 @@ BugReports: https://github.com/soerenkorsgaard/AdvancedR3/issues
 Suggests: 
     styler,
     usethis
+Depends: 
+    tidyverse

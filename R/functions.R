@@ -1,3 +1,7 @@
+
+# Descriptive statistics --------------------------------------------------
+
+
 #' Descriptive statistics - obtain mean and sd of numeric variables by a grouping variable
 #'
 #' @param data A dataset

@@ -1,4 +1,3 @@
-
 # Descriptive statistics --------------------------------------------------
 
 
@@ -11,7 +10,7 @@
 descriptive_stats <- function(data) {
   data |>
     dplyr::group_by(metabolite) |>
-    dplyr::summarise(dplyr::across(value, list(mean = mean, sd = sd))) |>
+    dplyr::summarise(dplyr::across(value, list(mean = mean, sd = sd, median = median, iqr = IQR))) |>
     dplyr::mutate(dplyr::across(dplyr::where(is.numeric), ~ round(.x, digits = 1)))
 }
 
@@ -25,13 +24,13 @@ descriptive_stats <- function(data) {
 #'
 #' @return ggplot object, histogram of metabolite distribution
 plot_distribution <- function(data) {
-    ggplot2::ggplot(
-        data,
-        aes
-        (x = value)
-    ) +
-        ggplot2::geom_histogram() +
-        ggplot2::facet_wrap(ggplot2::vars(metabolite),
-                            scales = "free"
-        )
+  ggplot2::ggplot(
+    data,
+    aes
+    (x = value)
+  ) +
+    ggplot2::geom_histogram() +
+    ggplot2::facet_wrap(ggplot2::vars(metabolite),
+      scales = "free"
+    )
 }

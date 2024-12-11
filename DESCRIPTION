@@ -7,11 +7,13 @@ Imports:
     ggplot2,
     here,
     knitr,
+    quarto,
     readr,
     readxl,
     rmarkdown,
     snakecase,
     stringr,
+    tarchetypes,
     targets,
     tidyr
 Encoding: UTF-8

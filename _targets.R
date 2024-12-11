@@ -50,17 +50,21 @@ tar_source()
 
 # Replace the target list below with your own:
 list(
-    tar_target(
-        name = file,
-        command = "data/lipidomics.csv",
-        format = "file"
-    ),
-    tar_target(
-        name = lipidomics,
-        command = readr::read_csv(file, show_col_types = FALSE)
-    ),
-    tar_target(
-        name = df_stats_by_metabolite,
-        command = descriptive_stats(lipidomics)
-    )
+  tar_target(
+    name = file,
+    command = "data/lipidomics.csv",
+    format = "file"
+  ),
+  tar_target(
+    name = lipidomics,
+    command = readr::read_csv(file, show_col_types = FALSE)
+  ),
+  tar_target(
+    name = df_stats_by_metabolite,
+    command = descriptive_stats(lipidomics)
+  ),
+  tar_target(
+    name = fig_metabolite_distribution,
+    command = plot_distribution(lipidomics)
+  )
 )

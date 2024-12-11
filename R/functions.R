@@ -26,7 +26,7 @@ descriptive_stats <- function(data) {
 plot_distribution <- function(data) {
   ggplot2::ggplot(
     data,
-    aes
+    ggplot2::aes
     (x = value)
   ) +
     ggplot2::geom_histogram() +

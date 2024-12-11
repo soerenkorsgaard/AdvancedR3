@@ -15,3 +15,23 @@ descriptive_stats <- function(data) {
     dplyr::mutate(dplyr::across(dplyr::where(is.numeric), ~ round(.x, digits = 1)))
 }
 
+
+
+# Distribution plot -------------------------------------------------------
+
+#' Plot for distribution of metabolites
+#'
+#' @param data Lipidomics dataset
+#'
+#' @return ggplot object, histogram of metabolite distribution
+plot_distribution <- function(data) {
+    ggplot2::ggplot(
+        data,
+        aes
+        (x = value)
+    ) +
+        ggplot2::geom_histogram() +
+        ggplot2::facet_wrap(ggplot2::vars(metabolite),
+                            scales = "free"
+        )
+}

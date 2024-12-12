@@ -69,7 +69,7 @@ list(
     command = plot_distribution(lipidomics)
   ),
   tar_quarto(
-      name = quarto_doc,
-      path = "doc/learning.qmd"
+    name = quarto_doc,
+    path = "doc/learning.qmd"
   )
 )

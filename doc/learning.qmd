@@ -13,7 +13,7 @@ source(here::here("R/functions.R"))
 lipidomics <- tar_read(lipidomics)
 ```
 
-## Results
+# Results
 
 ```{r}
 targets::tar_read(df_stats_by_metabolite) |>
@@ -39,7 +39,11 @@ lipidomics_wide
 ## Running multiple models
 
 ```{r}
-model_estimates <- lipidomics |> 
-    calculate_estimates()
-model_estimates
+tar_read(df_model_estimates)
+```
+
+## Visualizing the model estimates
+
+```{r}
+tar_read(fig_model_estimates)
 ```

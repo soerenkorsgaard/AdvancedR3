@@ -117,7 +117,7 @@ tidy_model_output <- function(workflow_fitted_model) {
     dplyr::mutate(dplyr::across(dplyr::where(is.numeric), ~ round(.x, digits = 2)))
 }
 
-# Convert long to multiple wide data frames -------------------------------------------------------
+# Convert long to wide, split by metabolite data frames -------------------------------------------------------
 
 #' Convert the long form dataset into a list of wide form data frames.
 #'
@@ -130,4 +130,21 @@ split_by_metabolite <- function(data) {
     column_values_to_snake_case(metabolite) |>
     dplyr::group_split(metabolite) |>
     purrr::map(metabolites_to_wider)
+}
+
+
+# Generate model for obtaining results -------------------------------------------------------
+
+#' Generate the results of a model
+#'
+#' @param data The lipidomics dataset
+#'
+#' @return A dataframe
+generate_model_results <- function(data) {
+  create_model_workflow(
+    model_specs = parsnip::logistic_reg() |> parsnip::set_engine("glm"),
+    recipe_specs = data |> create_recipe_spec(tidyselect::starts_with("metabolite_"))
+  ) |>
+    parsnip::fit(data) |>
+    tidy_model_output()
 }

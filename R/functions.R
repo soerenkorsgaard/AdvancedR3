@@ -180,13 +180,13 @@ calculate_estimates <- function(data) {
 #'
 #' @return A ggplot2 figure
 plot_estimates <- function(results) {
-    results |>
-        ggplot2::ggplot(ggplot2::aes(
-            x = estimate,
-            y = metabolite,
-            xmin = estimate - std.error,
-            xmax = estimate + std.error
-        )) +
-        ggplot2::geom_pointrange() +
-        ggplot2::coord_fixed(xlim = c(0, 5))
+  results |>
+    ggplot2::ggplot(ggplot2::aes(
+      x = estimate,
+      y = metabolite,
+      xmin = estimate - std.error,
+      xmax = estimate + std.error
+    )) +
+    ggplot2::geom_pointrange() +
+    ggplot2::coord_fixed(xlim = c(0, 5))
 }

@@ -113,8 +113,7 @@ create_model_workflow <- function(model_specs, recipe_specs) {
 tidy_model_output <- function(workflow_fitted_model) {
   workflow_fitted_model |>
     workflows::extract_fit_parsnip() |>
-    broom::tidy(exponentiate = TRUE) |>
-    dplyr::mutate(dplyr::across(dplyr::where(is.numeric), ~ round(.x, digits = 2)))
+    broom::tidy(exponentiate = TRUE)
 }
 
 # Convert long to wide, split by metabolite data frames -------------------------------------------------------
@@ -150,6 +149,7 @@ generate_model_results <- function(data) {
 }
 
 
+# Calculate estimates for each metabolite -------------------------------------------------------
 
 #' Calculate the estimates for the model for each metabolite.
 #'
@@ -164,12 +164,10 @@ calculate_estimates <- function(data) {
     dplyr::filter(stringr::str_detect(term, "metabolite_"))
 
   data |>
-      dplyr::select(metabolite) |>
-      dplyr::mutate(term=metabolite) |>
-      column_values_to_snake_case(term) |>
-      dplyr::mutate(term = stringr::str_c("metabolite_", term)) |>
-      dplyr::distinct(metabolite, term) |>
-      dplyr::right_join(model_estimates, by = "term")
-
-
+    dplyr::select(metabolite) |>
+    dplyr::mutate(term = metabolite) |>
+    column_values_to_snake_case(term) |>
+    dplyr::mutate(term = stringr::str_c("metabolite_", term)) |>
+    dplyr::distinct(metabolite, term) |>
+    dplyr::right_join(model_estimates, by = "term")
 }

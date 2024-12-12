@@ -185,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✖ dplyr::lag()      masks stats::lag()
 ✖ yardstick::spec() masks readr::spec()
 ✖ recipes::step()   masks stats::step()
-• Search for functions across packages at https://www.tidymodels.org/find/</code></pre>
+• Dig deeper into tidy modeling with R at https://www.tmwr.org</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R/functions.R"</span>))</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>lipidomics <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(lipidomics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -308,7 +308,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="running-multiple-models" class="level2">
 <h2 class="anchored" data-anchor-id="running-multiple-models">Running multiple models</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>lipidomics <span class="sc">|&gt;</span> <span class="fu">calculate_estimates</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model_estimates <span class="ot">&lt;-</span> lipidomics <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate_estimates</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: glm.fit: algorithm did not converge</code></pre>
 </div>
@@ -316,22 +317,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
 Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>model_estimates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 5
-   term                                estimate std.error statistic p.value
-   &lt;chr&gt;                                  &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
- 1 metabolite_cd_cl_3_solvent              0.09      0.86     -2.82    0   
- 2 metabolite_cholesterol                  2.97      0.46      2.38    0.02
- 3 metabolite_fa_ch_2_ch_2_coo             1.52      0.39      1.09    0.28
- 4 metabolite_lipid_ch_2                   0         3.14     -1.9     0.06
- 5 metabolite_lipid_ch_3_1                44.5       1.41      2.7     0.01
- 6 metabolite_lipid_ch_3_2                 0.88      0.36     -0.34    0.73
- 7 metabolite_mufa_pufa                    0.46      0.45     -1.75    0.08
- 8 metabolite_phosphatidycholine           0    116628.        0       1   
- 9 metabolite_phosphatidylethanolamine    26.9       1.32      2.49    0.01
-10 metabolite_phospholipids                0     68964.        0       1   
-11 metabolite_pufa                         3.27      0.56      2.11    0.03
-12 metabolite_tms_interntal_standard       0.06      0.99     -2.91    0   </code></pre>
+<pre><code># A tibble: 12 × 6
+   metabolite               term            estimate std.error statistic p.value
+   &lt;chr&gt;                    &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+ 1 TMS (interntal standard) metabolite_tm… 5.62e-  2   9.90e-1 -2.91     0.00363
+ 2 Cholesterol              metabolite_ch… 2.97e+  0   4.58e-1  2.38     0.0175 
+ 3 Lipid CH3- 1             metabolite_li… 4.45e+  1   1.41e+0  2.70     0.00697
+ 4 Lipid CH3- 2             metabolite_li… 8.85e-  1   3.61e-1 -0.339    0.734  
+ 5 Lipid -CH2-              metabolite_li… 2.59e-  3   3.14e+0 -1.90     0.0578 
+ 6 FA -CH2CH2COO-           metabolite_fa… 1.52e+  0   3.87e-1  1.09     0.276  
+ 7 PUFA                     metabolite_pu… 3.27e+  0   5.60e-1  2.11     0.0345 
+ 8 Phosphatidylethanolamine metabolite_ph… 2.69e+  1   1.32e+0  2.49     0.0129 
+ 9 Phosphatidycholine       metabolite_ph… 1.28e-120   1.17e+5 -0.00237  0.998  
+10 Phospholipids            metabolite_ph… 2.39e- 19   6.90e+4 -0.000622 1.00   
+11 MUFA+PUFA                metabolite_mu… 4.56e-  1   4.49e-1 -1.75     0.0798 
+12 CDCl3 (solvent)          metabolite_cd… 8.70e-  2   8.65e-1 -2.82     0.00475</code></pre>
 </div>
 </div>
 </section>
